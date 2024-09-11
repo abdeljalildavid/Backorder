@@ -1,0 +1,97 @@
+{
+    "table_name": "backorder_dataset",
+    "columns": [
+      {
+        "name": "sku",
+        "type": "str",
+        "description": "Unique identifier for the product (Stock Keeping Unit).",
+        "primary_key": true
+      },
+      {
+        "name": "national_inv",
+        "type": "int",
+        "description": "National inventory level for the product."
+      },
+      {
+        "name": "lead_time",
+        "type": "int",
+        "description": "Lead time in days to restock the product."
+      },
+      {
+        "name": "sales_last_month",
+        "type": "int",
+        "description": "Number of units sold in the previous month."
+      },
+      {
+        "name": "sales_last_year",
+        "type": "int",
+        "description": "Number of units sold in the same month of the previous year."
+      },
+      {
+        "name": "forecast_3_month",
+        "type": "int",
+        "description": "Forecasted sales for the next 3 months."
+      },
+      {
+        "name": "forecast_6_month",
+        "type": "int",
+        "description": "Forecasted sales for the next 6 months."
+      },
+      {
+        "name": "forecast_9_month",
+        "type": "int",
+        "description": "Forecasted sales for the next 9 months."
+      },
+      {
+        "name": "min_bank",
+        "type": "int",
+        "description": "Minimum quantity that should be in stock to meet demand without backorders."
+      },
+      {
+        "name": "perf_6_month_avg",
+        "type": "float",
+        "description": "Supplier’s performance score over the last 6 months."
+      },
+      {
+        "name": "perf_12_month_avg",
+        "type": "float",
+        "description": "Supplier’s performance score over the last 12 months."
+      },
+      {
+        "name": "local_bo_qty",
+        "type": "int",
+        "description": "Local backorder quantity (number of units on backorder locally)."
+      },
+      {
+        "name": "deck_risk",
+        "type": "bool",
+        "description": "Whether there is a risk of stock depletion (inventory dropping below safety stock level)."
+      },
+      {
+        "name": "oe_constraint",
+        "type": "bool",
+        "description": "Whether the product is under operational constraints (e.g., limited supply)."
+      },
+      {
+        "name": "ppap_risk",
+        "type": "bool",
+        "description": "Whether the product has a risk related to Production Part Approval Process."
+      },
+      {
+        "name": "stop_auto_buy",
+        "type": "bool",
+        "description": "Whether automatic purchasing of the product is disabled."
+      },
+      {
+        "name": "rev_stop",
+        "type": "bool",
+        "description": "Whether sales of the product are restricted or stopped."
+      },
+      {
+        "name": "went_on_backorder",
+        "type": "bool",
+        "description": "Target column indicating if the product went on backorder (True for yes, False for no)."
+      }
+    ]
+  }
+  

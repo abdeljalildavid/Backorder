@@ -1,0 +1,5 @@
+setuptools
+cassandra-driver 
+pandas 
+python-dotenv
+-e .
