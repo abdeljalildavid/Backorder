@@ -2,4 +2,8 @@ setuptools
 cassandra-driver 
 pandas 
 python-dotenv
+pyyaml
+scikit-learn
+Jinja2
+deepchecks
 -e .

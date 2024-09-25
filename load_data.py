@@ -36,14 +36,14 @@ session = cluster.connect()
 session.set_keyspace('backorder')
 
 # CQL to drop the table
-drop_table_query = "DROP TABLE IF EXISTS backorder_dataset;"
+#drop_table_query = "DROP TABLE IF EXISTS backorder_test_dataset;"
 
 # Execute the query
-session.execute(drop_table_query)
+#session.execute(drop_table_query)
 
 
 create_table_query = """
-CREATE TABLE IF NOT EXISTS backorder_dataset (
+CREATE TABLE IF NOT EXISTS backorder_test_dataset (
     sku TEXT PRIMARY KEY,
     national_inv FLOAT,              
     lead_time FLOAT,                 
@@ -82,7 +82,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 prepared_statement = session.prepare(insert_data_query)
 
 # Read CSV file
-df = pd.read_csv('Kaggle_Training_Dataset_v2.csv')
+df = pd.read_csv('./data/Kaggle_Test_Dataset_v2.csv')
 
 # Handle missing values (leave them as None for Cassandra to insert as NULL)
 df = df.where(pd.notnull(df), None)
@@ -95,7 +95,7 @@ for i, row in df.iterrows():
     if i == 90 : print()
     
     batch.add(prepared_statement, (
-        repr(row['sku']).encode('utf-8'),
+        repr(row['sku']),
         row['national_inv'],         # Missing values will be None, inserted as NULL in Cassandra
         row['lead_time'],
         row['in_transit_qty'],
@@ -107,17 +107,17 @@ for i, row in df.iterrows():
         row['sales_6_month'],
         row['sales_9_month'],
         row['min_bank'],
-        repr(row['potential_issue']).encode('utf-8'),       # Missing booleans will be None, inserted as NULL
+        repr(row['potential_issue']),       # Missing booleans will be None, inserted as NULL
         row['pieces_past_due'],
         row['perf_6_month_avg'],
         row['perf_12_month_avg'],
         row['local_bo_qty'],
-        repr(row['deck_risk']).encode('utf-8'),
-        repr(row['oe_constraint']).encode('utf-8'),
-        repr(row['ppap_risk']).encode('utf-8'),
-        repr(row['stop_auto_buy']).encode('utf-8'),
-        repr(row['rev_stop']).encode('utf-8'),
-        repr(row['went_on_backorder']).encode('utf-8')
+        repr(row['deck_risk']),
+        repr(row['oe_constraint']),
+        repr(row['ppap_risk']),
+        repr(row['stop_auto_buy']),
+        repr(row['rev_stop']),
+        repr(row['went_on_backorder'])
     ))
 
     # Execute batch after every 100 rows

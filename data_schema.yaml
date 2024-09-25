@@ -1,0 +1,98 @@
+backorder_dataset:
+
+  sku:
+    type: "string"
+    description: "Stock Keeping Unit identifier"
+  national_inv:
+    type: "float"
+    description: "Current inventory level"
+  lead_time:
+    type: "float"
+    description: "Lead time in weeks"
+  in_transit_qty:
+    type: "float"
+    description: "Quantity in transit from supplier"
+  forecast_3_month:
+    type: "float"
+    description: "Forecast demand for the next 3 months"
+  forecast_6_month:
+    type: "float"
+    description: "Forecast demand for the next 6 months"
+  forecast_9_month:
+    type: "float"
+    description: "Forecast demand for the next 9 months"
+  sales_1_month:
+    type: "float"
+    description: "Sales volume in the last 1 month"
+  sales_3_month:
+    type: "float"
+    description: "Sales volume in the last 3 months"
+  sales_6_month:
+    type: "float"
+    description: "Sales volume in the last 6 months"
+  sales_9_month:
+    type: "float"
+    description: "Sales volume in the last 9 months"
+  min_bank:
+    type: "float"
+    description: "Minimum recommended stock level"
+  potential_issue:
+    type: "string"
+    description: "Whether the item has potential issues ('Yes'/'No')"
+  pieces_past_due:
+    type: "float"
+    description: "Number of pieces past due from supplier"
+  perf_6_month_avg:
+    type: "float"
+    description: "Supplier performance average for the last 6 months"
+  perf_12_month_avg:
+    type: "float"
+    description: "Supplier performance average for the last 12 months"
+  local_bo_qty:
+    type: "float"
+    description: "Quantity backordered locally"
+  deck_risk:
+    type: "string"
+    description: "Whether there is a risk of backorder due to decking ('Yes'/'No')"
+  oe_constraint:
+    type: "string"
+    description: "Whether there is an operating equipment constraint ('Yes'/'No')"
+  ppap_risk:
+    type: "string"
+    description: "Risk related to production part approval process ('Yes'/'No')"
+  stop_auto_buy:
+    type: "string"
+    description: "Whether auto-buy should be stopped for the item ('Yes'/'No')"
+  rev_stop:
+    type: "string"
+    description: "Whether to stop auto-replenishment for the item ('Yes'/'No')"
+  went_on_backorder:
+    type: "string"
+
+columns:
+   - sku
+   - national_inv
+   - lead_time
+   - in_transit_qty
+   - forecast_3_month
+   - forecast_6_month
+   - forecast_9_month
+   - sales_1_month
+   - sales_3_month
+   - sales_6_month
+   - sales_9_month
+   - min_bank
+   - potential_issue
+   - pieces_past_due
+   - perf_6_month_avg
+   - perf_12_month_avg
+   - local_bo_qty
+   - deck_risk
+   - oe_constraint
+   - ppap_risk
+   - stop_auto_buy
+   - rev_stop
+   - went_on_backorder
+
+drop_columns:
+   - sku
