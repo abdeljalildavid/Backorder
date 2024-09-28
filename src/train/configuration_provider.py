@@ -73,20 +73,25 @@ class ConfigProvider:
             data_validation_dir = os.path.join(data_validation_master_dir,self.timestamp)
             valid_data_dir      = os.path.join(data_validation_dir,DATA_VALIDATION_VALID_DIR)
             invalid_data_dir    = os.path.join(data_validation_dir,DATA_VALIDATION_INVALID_DIR)
-            drift_report_dir    = os.path.join(data_validation_dir,DATA_VALIDATION_DRIFT_REPORT_DIR)
+            report_dir          = os.path.join(data_validation_dir,DATA_VALIDATION_REPORT_DIR)
+            drift_report_dir    = os.path.join(report_dir,DATA_VALIDATION_DRIFT_REPORT_DIR)
 
             
             data_validation_config = DataValidationConfig(
-               data_validation_dir_path = data_validation_master_dir,
-               valid_data_dir           = valid_data_dir,
-               invalid_data_dir         = invalid_data_dir,
-               valid_train_file_path    = os.path.join(valid_data_dir, TRAIN_FILE_NAME),
-               valid_test_file_path     = os.path.join(valid_data_dir, TEST_FILE_NAME),
-               invalid_train_file_path  = os.path.join(invalid_data_dir, TRAIN_FILE_NAME),
-               invalid_test_file_path   = os.path.join(invalid_data_dir, TEST_FILE_NAME),
-               drift_report_dir_path    = drift_report_dir,
-               drift_report_file_path   = os.path.join(drift_report_dir,DATA_VALIDATION_DRIFT_REPORT_FILE_NAME)
-               )
+               data_validation_dir_path      = data_validation_master_dir,
+               valid_data_dir                = valid_data_dir,
+               invalid_data_dir              = invalid_data_dir,
+               valid_train_file_path         = os.path.join(valid_data_dir, TRAIN_FILE_NAME),
+               valid_test_file_path          = os.path.join(valid_data_dir, TEST_FILE_NAME),
+               invalid_train_file_path       = os.path.join(invalid_data_dir, TRAIN_FILE_NAME),
+               invalid_test_file_path        = os.path.join(invalid_data_dir, TEST_FILE_NAME),
+               report_dir_path               = report_dir,
+               drift_report_dir_path         = drift_report_dir,
+               drift_report_yaml_file_path   = os.path.join(drift_report_dir,DATA_VALIDATION_DRIFT_REPORT_YAML_FILE),
+               drift_report_html_file_path   = os.path.join(drift_report_dir,DATA_VALIDATION_DRIFT_REPORT_HTML_FILE),
+               missing_columns_html_file_path= os.path.join(report_dir,DATA_VALIDATION_MISSING_COLUMNS_REPORT_HTML_FILE)
+
+           )
             logging.info(f"Data validation config: {data_validation_config}")
             return data_validation_config
         except Exception as e:

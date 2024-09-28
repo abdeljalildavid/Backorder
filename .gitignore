@@ -1,4 +1,5 @@
 .venv
+backorder_artifact*
 Backorder_Detection*
 data
 build

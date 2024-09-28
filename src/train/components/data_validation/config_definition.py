@@ -8,6 +8,9 @@ DataValidationConfig = namedtuple("DataValidationConfig", [
                                                          "valid_test_file_path",
                                                          "invalid_train_file_path",
                                                          "invalid_test_file_path",
+                                                         "report_dir_path",
                                                          "drift_report_dir_path",
-                                                         "drift_report_file_path"
+                                                         "drift_report_yaml_file_path",
+                                                         "drift_report_html_file_path",
+                                                         "missing_columns_html_file_path",
                                                          ])

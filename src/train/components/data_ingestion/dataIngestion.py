@@ -46,7 +46,7 @@ class DataIngestion:
             os.makedirs(dir_path, exist_ok=True)
 
             
-            df.to_csv(self.data_ingestion_config.feature_store_file_path)
+            df.to_csv(self.data_ingestion_config.feature_store_file_path, index=False)
             cassandra_manager.close()
             return df
         

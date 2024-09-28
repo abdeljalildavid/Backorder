@@ -26,6 +26,25 @@ def read_yaml(file_path:str)-> Optional[Dict[str,Any]]:
         except Exception as e:
             logging(f"An unexpected error occurred: {BackOrderException(e,sys)}")
         return None
+
+
+import yaml
+import sys
+from src.logger import logging
+from src.exception import BackOrderException
+from typing import Optional, Dict, Any
+
+
+
+def write_to_yaml(file_path:str, content:dict)-> None:
+        
+    try:
+        with open(file_path, "w") as yaml_file:
+            if content is not None:
+                yaml.dump(content, yaml_file,default_flow_style=False)
+    except Exception as e:
+        logging.error(BackOrderException(e,sys))
+     
     
 if __name__ == "__main__":
     out = read_yaml('./data_schema.yaml')['drop_columns'][0]
