@@ -1,0 +1,3 @@
+MODEL_EVALUATOR_DIR_NAME = "model_trainer"
+MODEL_REPORT_FILE = "report.yaml"
+THREASHOLD = 0.02

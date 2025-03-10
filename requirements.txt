@@ -1,0 +1,11 @@
+setuptools
+cassandra-driver 
+pandas 
+python-dotenv
+pyyaml
+scikit-learn
+Jinja2
+deepchecks==0.17.0
+dill
+azure-storage-blob
+-e .

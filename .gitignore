@@ -1,0 +1,10 @@
+.venv
+backorder_artifact*
+Backorder_Detection*
+data
+build
+dist
+log
+.env
+__pycache__
+secure-connect-backorderdb.zip
