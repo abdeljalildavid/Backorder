@@ -5,5 +5,7 @@ python-dotenv
 pyyaml
 scikit-learn
 Jinja2
-deepchecks
+deepchecks==0.17.0
+dill
+azure-storage-blob
 -e .

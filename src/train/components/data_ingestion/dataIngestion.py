@@ -1,3 +1,4 @@
+from wsgiref.simple_server import sys_version
 from src.train.components.data_ingestion.config_definition import DataIngestionConfig
 from src.train.components.data_ingestion.artifact_definition import DataIngestionArtifact
 from src.train.pipline.constants import DATA_SCHEMA_FILE_PATH
@@ -46,12 +47,13 @@ class DataIngestion:
             os.makedirs(dir_path, exist_ok=True)
 
             
-            df.to_csv(self.data_ingestion_config.feature_store_file_path)
+            df.to_csv(self.data_ingestion_config.feature_store_file_path, index=False)
             cassandra_manager.close()
             return df
         
         except Exception as e:
-            logging.error(BackOrderException(e,sys))
+            logging.error(BackOrderException(e,sys)) # type: ignore
+            raise(BackOrderException(e,sys)) # type: ignore
     
     def split_data_as_train_test(self, dataframe: pd.DataFrame) -> None:
         """
@@ -89,7 +91,7 @@ class DataIngestion:
 
             logging.info(f" Done.")
         except Exception as e:
-            logging.error(BackOrderException(e,sys))
+            logging.error(BackOrderException(e,sys)) # type: ignore
         
 
 
@@ -104,5 +106,5 @@ class DataIngestion:
             logging.info("Terminater")
             return data_ingestion_artifact
         except Exception as e:
-            logging.error(BackOrderException(e,sys))
-            return DataIngestionArtifact()
+            logging.error(BackOrderException(e,sys)) # type: ignore
+            raise(BackOrderException(e,sys)) # type: ignore

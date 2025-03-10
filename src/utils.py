@@ -1,12 +1,16 @@
+
 import yaml
-import sys
+import json
+import sys,os
+import numpy as np
+import dill
 from src.logger import logging
 from src.exception import BackOrderException
-from typing import Optional, Dict, Any
+from typing import Dict
 
 
 
-def read_yaml(file_path:str)-> Optional[Dict[str,Any]]:
+def read_yaml(file_path:str)-> Dict:
         """
         
         Reads a YAML file and returns the content as a Python dictionary.
@@ -19,14 +23,70 @@ def read_yaml(file_path:str)-> Optional[Dict[str,Any]]:
             with open(file_path, 'r') as file:
                 content = yaml.safe_load(file)  # Load YAML into Python dictionary
             return content
-        except FileNotFoundError:
-            logging(f"Error: File {file_path} not found.")
-        except yaml.YAMLError as e:
-            logging(f"Error while parsing YAML file: {BackOrderException(e,sys)}")
-        except Exception as e:
-            logging(f"An unexpected error occurred: {BackOrderException(e,sys)}")
-        return None
     
-if __name__ == "__main__":
-    out = read_yaml('./data_schema.yaml')['drop_columns'][0]
-    print(out)
+        except Exception as e:
+            logging.error(f"An unexpected error occurred: {BackOrderException(e,sys)}")
+            raise(BackOrderException(e,sys))
+        
+
+
+
+
+def write_to_json(file_path:str, content:dict)-> None:
+        
+    
+        with open(file_path, "w") as file:
+            if content is not None:
+                json.dump(content, file,)
+    
+
+def save_numpy_array_data(file_path: str, array: np.ndarray)-> None:
+    """
+    Save numpy array data to file
+    file_path: str location of file to save
+    array: numpy array data to save
+    """
+    try:
+        dir_path = os.path.dirname(file_path)
+        os.makedirs(dir_path, exist_ok=True)
+        with open(file_path, "wb") as file_obj:
+            np.save(file_obj, array)
+    except Exception as e:
+        
+        raise BackOrderException(e, sys)
+
+
+def load_numpy_array_data(file_path: str) -> np.ndarray:
+    """
+    load numpy array data from file
+    file_path: str location of file to load
+    return: np.array data loaded
+    """
+    try:
+        with open(file_path, "rb") as file_obj:
+            return np.load(file_obj)
+    except Exception as e:
+        raise BackOrderException(e, sys)
+
+
+def save_object(file_path: str, obj: object) -> None:
+    try:
+        logging.info("Entered the save_object method of MainUtils class")
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "wb") as file_obj:
+            dill.dump(obj, file_obj)
+        logging.info("Exited the save_object method of MainUtils class")
+    except Exception as e:
+        raise BackOrderException(e, sys) from e
+
+
+def load_object(file_path: str, ) -> object:
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f"The file: {file_path} is not exists")
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
+    except Exception as e:
+        raise BackOrderException(e, sys) from e
+     
+    
